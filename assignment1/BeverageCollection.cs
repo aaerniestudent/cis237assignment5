@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace assignment1
 {
-    class WineItemCollection : IWineCollection
+    class BeverageCollection : IBeverageCollection
     {
         //Private Variables
         WineItem[] wineItems;
         int wineItemsLength;
 
         //Constuctor. Must pass the size of the collection.
-        public WineItemCollection(int size)
+        public BeverageCollection(int size)
         {
             wineItems = new WineItem[size];
             wineItemsLength = 0;
@@ -63,20 +63,20 @@ namespace assignment1
             //Declare return string for the possible found item
             string returnString = null;
 
-            //For each WineItem in wineItems
-            foreach (WineItem wineItem in wineItems)
-            {
-                //If the wineItem is not null
-                if (wineItem != null)
-                {
-                    //if the wineItem Id is the same as the search id
-                    if (wineItem.Id == id)
-                    {
-                        //Set the return string to the result of the wineItem's ToString method
-                        returnString = wineItem.ToString();
-                    }
-                }
-            }
+            ////For each WineItem in wineItems
+            //foreach (WineItem wineItem in wineItems)
+            //{
+            //    //If the wineItem is not null
+            //    if (wineItem != null)
+            //    {
+            //        //if the wineItem Id is the same as the search id
+            //        if (wineItem.Id == id)
+            //        {
+            //            //Set the return string to the result of the wineItem's ToString method
+            //            returnString = wineItem.ToString();
+            //        }
+            //    }
+            //}
             //Return the returnString
             return returnString;
         }
