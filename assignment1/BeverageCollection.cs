@@ -9,75 +9,71 @@ using System.Threading.Tasks;
 
 namespace assignment1
 {
-    class BeverageCollection : IBeverageCollection
+    class BeverageCollection
     {
-        //Private Variables
-        WineItem[] wineItems;
-        int wineItemsLength;
 
-        //Constuctor. Must pass the size of the collection.
-        public BeverageCollection(int size)
+        private BeverageAAernieEntities beverageAAernieEntities = new BeverageAAernieEntities();
+        
+        public bool AddNewItem(string id, string name, string pack, decimal price, bool active)
         {
-            wineItems = new WineItem[size];
-            wineItemsLength = 0;
-        }
 
-        //Add a new item to the collection
-        public void AddNewItem(string id, string description, string pack)
-        {
-            //Add a new WineItem to the collection. Increase the Length variable.
-            wineItems[wineItemsLength] = new WineItem(id, description, pack);
-            wineItemsLength++;
+
+            return true;
         }
         
-        //Get The Print String Array For All Items
+        //creates a string for the beverage passed in
+        private string SingleString(Beverage b)
+        {            
+            return b.id.Trim() + "   "+ b.name + " " + b.pack + " " + b.price.ToString() + " " + b.active.ToString();
+        }
+
+        //converts beverages into strings and returns string array
         public string[] GetPrintStringsForAllItems()
         {
-            //Create and array to hold all of the printed strings
-            string[] allItemStrings = new string[wineItemsLength];
-            //set a counter to be used
-            int counter = 0;
+            //old method
+            ////set a counter to be used
+            //int counter = 0;
 
-            //If the wineItemsLength is greater than 0, create the array of strings
-            if (wineItemsLength > 0)
+            ////If the wineItemsLength is greater than 0, create the array of strings
+            //if (wineItemsLength > 0)
+            //{
+            //    //For each item in the collection
+            //    foreach (WineItem wineItem in wineItems)
+            //    {
+            //        //if the current item is not null.
+            //        if (wineItem != null)
+            //        {
+            //            //Add the results of calling ToString on the item to the string array.
+            //            allItemStrings[counter] = wineItem.ToString();
+            //            counter++;
+            //        }
+            //    }
+            //}
+            ////Return the array of item strings
+
+            //returning an array of beverage strings
+            string[] allItemStrings = new string[beverageAAernieEntities.Beverages.Count()];
+            int counter = 0;
+            foreach (Beverage bev in beverageAAernieEntities.Beverages)
             {
-                //For each item in the collection
-                foreach (WineItem wineItem in wineItems)
-                {
-                    //if the current item is not null.
-                    if (wineItem != null)
-                    {
-                        //Add the results of calling ToString on the item to the string array.
-                        allItemStrings[counter] = wineItem.ToString();
-                        counter++;
-                    }
-                }
+                allItemStrings[counter] = SingleString(bev);
+                counter++;
             }
-            //Return the array of item strings
+            
             return allItemStrings;
         }
 
         //Find an item by it's Id
         public string FindById(string id)
-        {
-            //Declare return string for the possible found item
+        {          
             string returnString = null;
-
-            ////For each WineItem in wineItems
-            //foreach (WineItem wineItem in wineItems)
-            //{
-            //    //If the wineItem is not null
-            //    if (wineItem != null)
-            //    {
-            //        //if the wineItem Id is the same as the search id
-            //        if (wineItem.Id == id)
-            //        {
-            //            //Set the return string to the result of the wineItem's ToString method
-            //            returnString = wineItem.ToString();
-            //        }
-            //    }
-            //}
-            //Return the returnString
+            //search for the passed in id
+            Beverage beverageToFind = beverageAAernieEntities.Beverages.Find(id);
+            if (beverageToFind != null)
+            {
+                returnString = SingleString(beverageToFind);
+            }
+            //"not found" errors are handled after return as they will display a message
             return returnString;
         }
 

@@ -11,7 +11,7 @@ namespace assignment1
 {
     class UserInterface
     {
-        const int maxMenuChoice = 7;
+        const int maxMenuChoice = 6;
         //---------------------------------------------------
         //Public Methods
         //---------------------------------------------------
@@ -135,6 +135,14 @@ namespace assignment1
         {
             Console.WriteLine();
             Console.WriteLine("An Item With That Id Already Exists");
+        }
+
+        //***new error***
+        //Display Item Input Error
+        public void DisplayItemInputError()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Error Entering Item Info");
         }
 
 
