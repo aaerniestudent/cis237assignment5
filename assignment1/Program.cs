@@ -74,33 +74,26 @@ namespace assignment1
                         Decimal newItemPrice = userInterface.GetItemPrice();
                         bool newItemActive = userInterface.GetItemActive();
                         bool addSuccessful = false;
-                        //any invalid input check... only checking if the primary key is null
-                        if (newItemInformation[0] == null)
+                        Console.WriteLine(newItemInformation[0] + " " + newItemInformation[1] + " "  +newItemInformation[2]);
+                        //check if the key already exists
+                        if (beverageCollection.FindById(newItemInformation[0]) == null)
                         {
-                            //check if the key already exists
-                            if (beverageCollection.FindById(newItemInformation[0]) == null)
+                            //add item
+                            addSuccessful = beverageCollection.AddNewItem(newItemInformation[0], newItemInformation[1], newItemInformation[2], newItemPrice, newItemActive);
+                            //show the user if the add was successful
+                            if (addSuccessful)
                             {
-                                //add item
-                                addSuccessful = beverageCollection.AddNewItem(newItemInformation[0], newItemInformation[1], newItemInformation[2], newItemPrice, Boolean.Parse(newItemInformation[4]));
-                                //show the user if the add was successful
-                                if (addSuccessful)
-                                {
-                                    userInterface.DisplayAddBeverageSuccess();
-
-                                } else {
-                                    userInterface.DisplayAddBeverageFailure();
-                                }
+                                userInterface.DisplayAddBeverageSuccess();
+                            } else {
+                                userInterface.DisplayAddBeverageFailure();
                             }
-                            else
-                            {
-                                //shows error if item already exists
-                                userInterface.DisplayItemAlreadyExistsError();
-                            }
-                        } else
+                        }
+                        else
                         {
-                            //error for invalid inputs
-                            userInterface.DisplayItemInputError();
-                        }                      
+                            //shows error if item already exists
+                            userInterface.DisplayItemAlreadyExistsError();
+                        }
+                                          
                         break;
 
                     case 4:

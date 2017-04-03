@@ -239,14 +239,14 @@ namespace assignment1
         public void DisplayUpdateBeverageFailure()
         {
             Console.WriteLine();
-            Console.WriteLine("Error removing item from database: Item may not exist");
+            Console.WriteLine("Error updating item in database");
         }
 
         //display update successful
         public void DisplayUpdateBeverageSuccess()
         {
             Console.WriteLine();
-            Console.WriteLine("Removed item from database");
+            Console.WriteLine("Updated item in database");
         }
         //Display delete Fail
         public void DisplayDeleteBeverageFailure()
