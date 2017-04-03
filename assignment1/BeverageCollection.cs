@@ -1,6 +1,6 @@
-﻿//Author: David Barnes
+﻿//Author: Anthony Aernie
 //CIS 237
-//Assignment 1
+//Assignment 5
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +17,6 @@ namespace assignment1
         //CREATE new beverage, add to the database and save
         public bool AddNewItem(string id, string name, string pack, decimal price, bool active)
         {
-            //boolean to return if successful add
-            bool good = true;
             //new beverage to add
             Beverage toAdd = new Beverage();
             //add properties
@@ -37,9 +35,9 @@ namespace assignment1
             {
                 //remove from the database in case it was added and the save failed
                 beverageAAernieEntities.Beverages.Remove(toAdd);
-                good = false;
+                return false;
             }
-            return good;
+            return true;
         }
                
         //READ beverages and return as a string array
@@ -72,34 +70,48 @@ namespace assignment1
             return returnString;
         }
 
-        //UPDATE
+        //UPDATE update an item with matching id
         public bool UpdateRecord(string id, string name, string pack, decimal price, bool active)
         {
-            
+            //find by id
             Beverage beverageToUpdate = beverageAAernieEntities.Beverages.Find(id);
+            //update item
             beverageToUpdate.name = name;
             beverageToUpdate.pack = pack;
             beverageToUpdate.price = price;
             beverageToUpdate.active = active;
-            beverageAAernieEntities.SaveChanges();            
+            try
+            {              
+                //save changes to database
+                beverageAAernieEntities.SaveChanges();
+            } catch
+            {
+                return false;
+            }
             return true;
 
         }
-        //DELETE
+        //DELETE: delete an item with matching id
         public bool DeleteById(string id)
         {
-            bool good = true;
+            //get the beverage to delete
             Beverage beverageToDelete = beverageAAernieEntities.Beverages.Find(id);
             try
             {
+                //remove beverage
                 beverageAAernieEntities.Beverages.Remove(beverageToDelete);
+                //save changes to database
                 beverageAAernieEntities.SaveChanges();
             }catch
             {
-                good = false;
+                return false;
             }
-            return good;
+            return true;
         }
+
+        //------------------
+        //Private Methods
+        //------------------
 
         //returns a string for the beverage passed in
         private string SingleString(Beverage b)

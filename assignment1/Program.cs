@@ -1,6 +1,7 @@
-﻿//Author: David Barnes
+﻿//Author: Anthony Aernie
 //CIS 237
-//Assignment 1
+//Assignment 5
+
 /*
  * The Menu has been updated
  * The Menu Choices Displayed By The UI
@@ -74,7 +75,6 @@ namespace assignment1
                         Decimal newItemPrice = userInterface.GetItemPrice();
                         bool newItemActive = userInterface.GetItemActive();
                         bool addSuccessful = false;
-                        Console.WriteLine(newItemInformation[0] + " " + newItemInformation[1] + " "  +newItemInformation[2]);
                         //check if the key already exists
                         if (beverageCollection.FindById(newItemInformation[0]) == null)
                         {

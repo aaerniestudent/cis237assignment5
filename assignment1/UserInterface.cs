@@ -1,12 +1,13 @@
-﻿//Author: David Barnes
+﻿//Author: Anthony Aernie
 //CIS 237
-//Assignment 1
+//Assignment 5
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//methods have been added, but some methods have been kept the same
 namespace assignment1
 {
     class UserInterface
@@ -17,10 +18,11 @@ namespace assignment1
         //---------------------------------------------------
 
         //Display Welcome Greeting
+        //***added buffer height, changed welcome message***
         public void DisplayWelcomeGreeting()
-        {
+        {            
             Console.BufferHeight = 10000;
-            Console.WriteLine("Welcome to the wine program");
+            Console.WriteLine("Welcome to the beverage program");
         }
 
         //Display Menu And Get Response
@@ -82,7 +84,7 @@ namespace assignment1
         //get information for update
         public string[] GetUpdateItemInformation()
         {
-
+            //already have ID
             Console.WriteLine("What is the updated items Description?");
             Console.Write("> ");
             string description = Console.ReadLine();
@@ -93,15 +95,15 @@ namespace assignment1
             return new string[] { description, pack };
         }
 
-
         //get and validate item price
+        //used in new and update
         public decimal GetItemPrice()
         {
             decimal price = -1;
-            Console.WriteLine();
             Console.WriteLine("What is the items Price?");
-            Console.Write("> ");
+            Console.Write("> $");
             //get a valid price
+            //no voids, but zero is valid
             while (price < 0)
             {
                 string input = Console.ReadLine();
@@ -121,11 +123,11 @@ namespace assignment1
         }
 
         //get and validate item active status
+        //used in new and update
         public bool GetItemActive()
         {
             bool active = true;
             bool response = false;
-            Console.WriteLine();
             Console.WriteLine("Is the item Active?");
             Console.WriteLine("> Y/N?");
             //get a valid input
@@ -133,6 +135,7 @@ namespace assignment1
             {
                 string input = Console.ReadLine();
                 //check valid inputs Y/N
+                //no voids
                 if (input == "y" || input == "Y")
                 {
                     response = true;
@@ -141,13 +144,12 @@ namespace assignment1
                     active = false;
                     response = true;
                 } else
-                {
+                {                  
                     Console.WriteLine();
                     Console.WriteLine("Please input just Y or N");
                     Console.WriteLine("Is the item Active?");
                     Console.WriteLine("> Y/N?");
                 }
-
             }
             return active;
         }
