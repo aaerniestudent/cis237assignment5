@@ -19,6 +19,7 @@ namespace assignment1
         //Display Welcome Greeting
         public void DisplayWelcomeGreeting()
         {
+            Console.BufferHeight = 10000;
             Console.WriteLine("Welcome to the wine program");
         }
 
