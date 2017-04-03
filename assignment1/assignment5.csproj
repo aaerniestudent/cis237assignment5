@@ -73,7 +73,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInterface.cs" />
-    <Compile Include="WineItem.cs" />
     <Compile Include="BeverageCollection.cs" />
   </ItemGroup>
   <ItemGroup>

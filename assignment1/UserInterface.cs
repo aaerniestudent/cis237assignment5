@@ -77,18 +77,78 @@ namespace assignment1
             return new string[] { id, description, pack };
         }
 
-        //Display Import Success
-        public void DisplayImportSuccess()
+        //***new get item information methods***
+        //get information for update
+        public string[] GetUpdateItemInformation()
         {
-            Console.WriteLine();
-            Console.WriteLine("Wine List Has Been Imported Successfully");
+
+            Console.WriteLine("What is the updated items Description?");
+            Console.Write("> ");
+            string description = Console.ReadLine();
+            Console.WriteLine("What is the updated items Pack?");
+            Console.Write("> ");
+            string pack = Console.ReadLine();
+
+            return new string[] { description, pack };
         }
 
-        //Display Import Error
-        public void DisplayImportError()
+
+        //get and validate item price
+        public decimal GetItemPrice()
         {
+            decimal price = -1;
             Console.WriteLine();
-            Console.WriteLine("There was an error importing the CSV");
+            Console.WriteLine("What is the items Price?");
+            Console.Write("> ");
+            //get a valid price
+            while (price < 0)
+            {
+                string input = Console.ReadLine();
+                try
+                {
+                    price = Decimal.Parse(input);
+                }
+                catch
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Error: not a valid price: price must be a positive number");
+                    Console.WriteLine("What is the items Price?");
+                    Console.Write("> $");
+                }
+            }
+            return price;
+        }
+
+        //get and validate item active status
+        public bool GetItemActive()
+        {
+            bool active = true;
+            bool response = false;
+            Console.WriteLine();
+            Console.WriteLine("Is the item Active?");
+            Console.WriteLine("> Y/N?");
+            //get a valid input
+            while (!response)
+            {
+                string input = Console.ReadLine();
+                //check valid inputs Y/N
+                if (input == "y" || input == "Y")
+                {
+                    response = true;
+                }else if (input == "n" || input == "N")
+                {
+                    active = false;
+                    response = true;
+                } else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please input just Y or N");
+                    Console.WriteLine("Is the item Active?");
+                    Console.WriteLine("> Y/N?");
+                }
+
+            }
+            return active;
         }
 
         //Display All Items
@@ -100,6 +160,29 @@ namespace assignment1
                 Console.WriteLine(itemOutput);
             }
         }
+
+        //***Update Methods***
+        //Get the search query from the user
+        public string GetUpdateQuery()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Please input an ID to update:");
+            Console.Write("> ");
+            return Console.ReadLine();
+        }
+
+        //***Delete Methods***
+        public string GetDeleteQuery()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Please input an ID to delete:");
+            Console.Write("> ");
+            return Console.ReadLine();
+        }
+
+        //-------------------------
+        //Errors and user prompts
+        //-------------------------
 
         //Display All Items Error
         public void DisplayAllItemsError()
@@ -124,7 +207,7 @@ namespace assignment1
         }
 
         //Display Add Wine Item Success
-        public void DisplayAddWineItemSuccess()
+        public void DisplayAddBeverageSuccess()
         {
             Console.WriteLine();
             Console.WriteLine("The Item was successfully added");
@@ -137,7 +220,7 @@ namespace assignment1
             Console.WriteLine("An Item With That Id Already Exists");
         }
 
-        //***new error***
+        //***new errors or display messages***
         //Display Item Input Error
         public void DisplayItemInputError()
         {
@@ -145,6 +228,39 @@ namespace assignment1
             Console.WriteLine("Error Entering Item Info");
         }
 
+        //Display Add beverage Fail
+        public void DisplayAddBeverageFailure()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Error adding item to database");
+        }
+
+        //Display update Fail
+        public void DisplayUpdateBeverageFailure()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Error removing item from database: Item may not exist");
+        }
+
+        //display update successful
+        public void DisplayUpdateBeverageSuccess()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Removed item from database");
+        }
+        //Display delete Fail
+        public void DisplayDeleteBeverageFailure()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Error removing item from database: Item may not exist");
+        }
+
+        //display delete successful
+        public void DisplayDeleteBeverageSuccess()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Removed item from database");
+        }
 
         //---------------------------------------------------
         //Private Methods
